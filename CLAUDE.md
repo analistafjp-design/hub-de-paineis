@@ -13,7 +13,10 @@ Os dois painéis têm repositório próprio: `analistafjp-design/painel-executiv
 ## Regras permanentes
 
 1. **Os endereços e textos dos botões ficam só em `docs/paineis.js`.** Nunca coloque um
-   endereço de painel dentro de `index.html` ou `hub.js`.
+   endereço de painel dentro de `index.html` ou `hub.js`. Os dois primeiros endereços
+   (Executivo e Pós-Corte) já estão preenchidos; **os próximos, o usuário insere ele mesmo**
+   (pelo botão "Editar links" ou pelo arquivo). Não deixe "endereço a definir" nos botões
+   que já existem.
 2. **Nada de fora**: sem CDN, fonte externa, biblioteca ou requisição de rede. A página
    tem Content-Security-Policy (`script-src 'self'`); não use `onclick=` nem script inline.
 3. **Só `http(s)` vira link.** Nenhum texto da configuração entra na página como HTML
@@ -23,9 +26,10 @@ Os dois painéis têm repositório próprio: `analistafjp-design/painel-executiv
 5. **Modelo escolhido pelo usuário (06/10/2026): o "D"** — barra lateral escura + cartões
    grandes coloridos + quadro tracejado "+ Adicionar painel". Os outros modelos (A, B, C)
    foram só proposta e foram descartados; não os recrie sem o usuário pedir.
-6. **Logo da Águas do Rio**: ainda não foi enviada pelo usuário. Quando vier, coloque em
-   `docs/` e preencha `"logo"` em `paineis.js` (opacidade em `"logoOpacidade"`). Não
-   invente nem desenhe uma logo.
+6. **Logo da Águas do Rio**: `docs/logo.png`, feita a partir da imagem que o usuário enviou
+   (06/10/2026; o fundo branco virou transparência). É configurada em `paineis.js`
+   (`"logo"` e `"logoOpacidade"`), fica encostada embaixo e bem clara, atrás dos cartões.
+   Não invente nem redesenhe a logo; para trocá-la, use o arquivo que o usuário mandar.
 7. **Todo ajuste ganha um teste** em `tests/*.test.mjs`. Antes de cada commit rode
    `npm test`.
 8. **Mudança visível**: confira no Chromium (Playwright pré-instalado em

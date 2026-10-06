@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 import vm from "node:vm";
 
@@ -118,4 +118,16 @@ test("nenhum texto da configuração entra na página como HTML: só os ícones 
   assert.ok(usosDeHtml.length > 0);
   for (const linha of usosDeHtml)
     assert.match(linha, /innerHTML = svg\(|innerHTML = v|html: svg\(|html: `<span>Abrir painel<\/span>\$\{SETA\}`|k === "html"|else if \(k === "html"\)/, linha.trim());
+});
+
+test("a logo de fundo existe na pasta docs, é um PNG com transparência e fica clara", async () => {
+  assert.equal(HUB_CONFIG.logo, "logo.png");
+  assert.equal(imagemValida(HUB_CONFIG.logo), "logo.png");
+  await access(new URL("../docs/logo.png", import.meta.url));
+  const png = await readFile(new URL("../docs/logo.png", import.meta.url));
+  // Assinatura PNG e tipo de cor 6 (RGBA): o fundo branco do original virou transparência.
+  assert.deepEqual([...png.subarray(0, 8)], [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
+  assert.equal(png[25], 6);
+  assert.ok(png.length < 400 * 1024, "a logo não deve pesar mais de 400 KB");
+  assert.ok(HUB_CONFIG.logoOpacidade >= 0.05 && HUB_CONFIG.logoOpacidade <= 0.2, "logo clara, sem atrapalhar a leitura");
 });

@@ -28,13 +28,13 @@ Só entram endereços que começam com `https://` ou `http://`.
 
 ## Logo de fundo (Águas do Rio)
 
-1. Coloque o arquivo na pasta `docs/` (por exemplo `docs/logo.png`; vale PNG, SVG, JPG
-   ou WebP, de preferência com fundo transparente).
-2. Em `docs/paineis.js`, escreva o nome em `"logo": "logo.png"`.
-3. A intensidade é o `"logoOpacidade"` (de `0.02`, quase invisível, a `0.3`; o padrão é
-   `0.07`).
+A logo está em `docs/logo.png` (PNG com fundo transparente, feito a partir da imagem
+enviada pelo usuário) e aparece bem clara atrás dos botões. Em `docs/paineis.js`:
 
-Sem logo configurada, a página fica sem imagem de fundo.
+- `"logo": "logo.png"` é o nome do arquivo na pasta `docs/` (vale PNG, SVG, JPG ou WebP,
+  de preferência com fundo transparente). Para trocar a logo, substitua o arquivo ou
+  mude o nome. Vazio (`""`) tira a imagem de fundo.
+- `"logoOpacidade"` é a intensidade, de `0.02` (quase invisível) a `0.3`; hoje é `0.12`.
 
 ## Publicar (GitHub Pages)
 
@@ -52,6 +52,7 @@ exige plano pago.
 |---|---|
 | `docs/index.html` | A página (visual e editor de links) |
 | `docs/paineis.js` | **Os endereços e textos dos botões** (o que se edita) |
+| `docs/logo.png` | A logo de fundo (Águas do Rio) |
 | `docs/hub.js` | A lógica (validação dos endereços, desenho dos botões, editor) |
 | `tests/hub.test.mjs` | Testes automáticos |
 

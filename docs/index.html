@@ -24,8 +24,8 @@
   :focus-visible { outline: 3px solid #1e4fd6; outline-offset: 3px; border-radius: 8px; }
   [hidden] { display: none !important; }
 
-  /* A logo de fundo (config "logo"): centralizada, bem clara, atrás de tudo */
-  .watermark { position: fixed; z-index: 0; pointer-events: none; left: calc(50% + 135px); top: 50%; transform: translate(-50%, -50%); width: min(62vw, 760px); height: min(56vh, 520px); }
+  /* A logo de fundo (config "logo"): encostada embaixo, bem clara, atrás de tudo */
+  .watermark { position: fixed; z-index: 0; pointer-events: none; left: calc(50% + 135px); bottom: -6vh; transform: translateX(-50%); width: min(70vw, 720px); height: min(72vh, 640px); }
   .watermark img { width: 100%; height: 100%; object-fit: contain; }
 
   .page { position: relative; z-index: 1; min-height: 100vh; display: grid; grid-template-columns: 270px minmax(0, 1fr); }

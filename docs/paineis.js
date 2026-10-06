@@ -21,8 +21,8 @@
 window.HUB_CONFIG = {
   "titulo": "Hub de Painéis",
   "subtitulo": "Interior Lagos",
-  "logo": "",
-  "logoOpacidade": 0.07,
+  "logo": "logo.png",
+  "logoOpacidade": 0.12,
   "links": [
     {
       "id": "executivo",
