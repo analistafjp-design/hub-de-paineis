@@ -39,9 +39,12 @@ Os dois painéis têm repositório próprio: `analistafjp-design/painel-executiv
    (06/10/2026; o fundo branco virou transparência). É configurada em `paineis.js`
    (`"logo"` e `"logoOpacidade"`), fica encostada embaixo e bem clara, atrás dos cartões.
    Não invente nem redesenhe a logo; para trocá-la, use o arquivo que o usuário mandar.
-9. **Todo ajuste ganha um teste** em `tests/*.test.mjs`. Antes de cada commit rode
+9. **Favicon**: a marca da Águas do Rio que o usuário enviou (06/10/2026), em `favicon-32.png`,
+   `favicon-192.png` e `apple-touch-icon.png` (todos em `docs/`). Não volte ao ícone
+   desenhado à mão. Um teste confere os arquivos e os tamanhos declarados no HTML.
+10. **Todo ajuste ganha um teste** em `tests/*.test.mjs`. Antes de cada commit rode
    `npm test`.
-10. **Mudança visível**: confira no Chromium (Playwright pré-instalado em
+11. **Mudança visível**: confira no Chromium (Playwright pré-instalado em
    `/opt/pw-browsers`) no computador e no celular (390 px), sem rolagem lateral e sem
    erro no console.
 

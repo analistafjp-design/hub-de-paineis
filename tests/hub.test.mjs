@@ -158,3 +158,24 @@ test("o editor de links só aparece para quem abre o Hub com ?editar no endereç
   // E, mesmo que alguém chame o editor por fora, ele não abre sem o modo de edição.
   assert.match(hubSource, /function abrirEditor\(\) \{\s*if \(!modoEditar\) return;/);
 });
+
+test("o favicon é o da Águas do Rio: três PNGs na pasta docs, do tamanho que o HTML declara", async () => {
+  const icones = [...html.matchAll(/<link rel="(icon|apple-touch-icon)"[^>]*>/g)].map((m) => m[0]);
+  assert.equal(icones.length, 3);
+  // Nada do ícone antigo (um desenho embutido no HTML).
+  assert.doesNotMatch(html, /rel="icon"[^>]*href="data:/);
+  const esperados = { "favicon-32.png": 32, "favicon-192.png": 192, "apple-touch-icon.png": 180 };
+  const declarados = {};
+  for (const tag of icones) {
+    const href = tag.match(/href="([^"]+)"/)[1];
+    const tamanho = Number(tag.match(/sizes="(\d+)x\1"/)[1]);
+    declarados[href] = tamanho;
+    const png = await readFile(new URL(`../docs/${href}`, import.meta.url));
+    assert.deepEqual([...png.subarray(0, 8)], [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a], `${href}: PNG`);
+    // IHDR: largura e altura (4 bytes cada) a partir do byte 16.
+    assert.equal(png.readUInt32BE(16), tamanho, `${href}: largura`);
+    assert.equal(png.readUInt32BE(20), tamanho, `${href}: altura`);
+    assert.ok(png.length < 100 * 1024, `${href}: leve`);
+  }
+  assert.deepEqual(declarados, esperados);
+});

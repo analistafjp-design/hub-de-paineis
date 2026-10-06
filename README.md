@@ -52,6 +52,15 @@ enviada pelo usuário) e aparece bem clara atrás dos botões. Em `docs/paineis.
   mude o nome. Vazio (`""`) tira a imagem de fundo.
 - `"logoOpacidade"` é a intensidade, de `0.02` (quase invisível) a `0.3`; hoje é `0.12`.
 
+## Favicon (o ícone da aba)
+
+É a marca da Águas do Rio (fundo azul-esverdeado, "ae ÁGUAS DO RIO" em branco), enviada pelo
+usuário, em três tamanhos na pasta `docs/`: `favicon-32.png` (aba do navegador),
+`favicon-192.png` (atalhos e telas de alta resolução) e `apple-touch-icon.png` (180 px,
+tela inicial do iPhone/iPad). Os três são declarados no `<head>` de `docs/index.html`. Para
+trocar, gere os três tamanhos a partir da nova imagem e substitua os arquivos. Depois de
+publicar, o navegador pode demorar a trocar o ícone da aba (fecha e abre a aba, ou Ctrl+F5).
+
 ## Publicar (GitHub Pages)
 
 Mesmo esquema do Pós-Corte: no GitHub, **Settings → Pages → Build and deployment →
@@ -69,6 +78,7 @@ exige plano pago.
 | `docs/index.html` | A página (visual e editor de links) |
 | `docs/paineis.js` | **Os endereços e textos dos botões** (o que se edita) |
 | `docs/logo.png` | A logo de fundo (Águas do Rio) |
+| `docs/favicon-32.png`, `favicon-192.png`, `apple-touch-icon.png` | O ícone da aba |
 | `docs/hub.js` | A lógica (validação dos endereços, desenho dos botões, editor) |
 | `tests/hub.test.mjs` | Testes automáticos |
 
