@@ -17,12 +17,24 @@ Há três jeitos; o 1 e o 2 valem para todo mundo, o 3 só para o seu navegador.
    GitHub, pelo lápis do arquivo → *Commit changes*). Para acrescentar um painel,
    copie um bloco `{ ... }` da lista e mude os campos. O arquivo explica cada campo.
 2. **Pedindo para a Claude**: passe o nome e o endereço e ela atualiza o arquivo.
-3. **Pela própria página**: botão **Editar links** (ou o quadro **+ Adicionar painel**).
-   Edita nome, endereço, descrição, "abrir em nova aba" (já marcado em todo painel novo) e a ordem. O **Salvar neste
-   navegador** vale só ali. Para valer para todos, use **Copiar configuração** e cole o
-   texto em `docs/paineis.js` (ou mande o texto para a Claude).
+3. **Pela própria página, em modo de edição**: abra o Hub com `?editar` no final do
+   endereço (`https://analistafjp-design.github.io/hub-de-paineis/?editar`). Só assim
+   aparecem o botão **Editar links** e o quadro **+ Adicionar painel**; quem abre o
+   endereço de sempre vê apenas os botões dos painéis.
+   Edita nome, endereço, descrição, "abrir em nova aba" (já marcado em todo painel novo)
+   e a ordem. O **Salvar neste navegador** vale só ali. Para valer para todos, use
+   **Copiar configuração** e cole o texto em `docs/paineis.js` (ou mande o texto para a
+   Claude).
    Se a página mostrar "Links personalizados neste navegador · voltar ao padrão", o
    navegador está usando a cópia local; o botão volta para o que está no arquivo.
+
+## Quem pode mudar o que todos veem
+
+Só quem tem permissão de escrita neste repositório do GitHub (a conta do dono e quem ele
+convidar em Settings → Collaborators). O modo de edição da página **não é uma senha** e
+não dá poder nenhum sobre o que os outros veem: ele só grava no próprio navegador de
+quem o usa. Foi escondido para o botão não aparecer para quem só quer abrir os painéis
+(e ninguém achar que "editou para todos"). O que está publicado só muda por *commit*.
 
 Só entram endereços que começam com `https://` ou `http://`.
 
