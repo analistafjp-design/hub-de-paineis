@@ -1,0 +1,10 @@
+{
+  "name": "hub-de-paineis",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Página inicial com botões para os painéis (Executivo, Pós-Corte…).",
+  "scripts": {
+    "test": "node --test \"tests/*.test.mjs\""
+  }
+}
