@@ -179,3 +179,30 @@ test("o favicon é o da Águas do Rio: três PNGs na pasta docs, do tamanho que 
   }
   assert.deepEqual(declarados, esperados);
 });
+
+test("o Hub é instalável como aplicativo: o ícone da barra de tarefas vem do manifesto (192 e 512 px)", async () => {
+  // O HTML aponta para o manifesto, a política de conteúdo deixa carregá-lo e a cor da barra é a do painel.
+  assert.match(html, /<link rel="manifest" href="manifest\.webmanifest">/);
+  assert.match(html, /Content-Security-Policy[^>]+manifest-src 'self'/);
+  assert.match(html, /<meta name="theme-color" content="#0B3B66">/);
+  const manifesto = JSON.parse(await read("docs/manifest.webmanifest"));
+  assert.equal(manifesto.name, "Hub de Painéis");
+  assert.ok(manifesto.short_name && manifesto.short_name.length <= 12);
+  assert.equal(manifesto.start_url, "./");
+  assert.equal(manifesto.scope, "./");
+  assert.equal(manifesto.display, "standalone");
+  assert.equal(manifesto.theme_color, "#0B3B66");
+  // O navegador só aceita instalar com ícones de 192 e de 512 px, e eles têm de existir e ter o tamanho dito.
+  const lados = [];
+  for (const icone of manifesto.icons) {
+    assert.equal(icone.type, "image/png");
+    const lado = Number(icone.sizes.split("x")[0]);
+    const png = await readFile(new URL(`../docs/${icone.src}`, import.meta.url));
+    assert.deepEqual([...png.subarray(0, 8)], [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a], `${icone.src}: PNG`);
+    assert.equal(png.readUInt32BE(16), lado, `${icone.src}: largura`);
+    assert.equal(png.readUInt32BE(20), lado, `${icone.src}: altura`);
+    assert.ok(png.length < 300 * 1024, `${icone.src}: leve`);
+    lados.push(lado);
+  }
+  assert.ok(lados.includes(192) && lados.includes(512), `ícones do manifesto: ${lados}`);
+});
