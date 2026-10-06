@@ -50,7 +50,7 @@
         url: urlValida(item.url) || "",
         cor: String(item.cor || ""),
         icone: ICONES.includes(item.icone) ? item.icone : "link",
-        novaAba: item.novaAba === true,
+        novaAba: item.novaAba !== false, // abrir em outra aba é o padrão: o Hub fica aberto
       };
     });
     const opac = Number(base.logoOpacidade);
@@ -282,7 +282,7 @@
   $$("[data-open-editor]").forEach((b) => b.addEventListener("click", abrirEditor));
   $("#ed-close").addEventListener("click", () => dlg.close());
   $("#ed-add").addEventListener("click", () => {
-    rascunho.push({ id: `painel-${Date.now().toString(36)}`, titulo: "", descricao: "", url: "", cor: "", icone: "link", novaAba: false });
+    rascunho.push({ id: `painel-${Date.now().toString(36)}`, titulo: "", descricao: "", url: "", cor: "", icone: "link", novaAba: true });
     renderEditor();
     msg("");
   });

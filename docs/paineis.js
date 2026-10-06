@@ -14,7 +14,8 @@
 //   cor        "executivo", "poscorte" (as cores dos painéis existentes),
 //              um código como "#0b5d4f", ou vazio para uma cor automática
 //   icone      "grafico", "prancheta" ou "link"
-//   novaAba    true abre em outra aba; false abre na mesma
+//   novaAba    true abre o painel em outra aba, e o Hub continua aberto (o certo para
+//              um hub); false abre na mesma aba e o Hub some. Sem o campo, vale true.
 //
 // A logo de fundo: coloque o arquivo na pasta docs (ex.: docs/logo.png) e escreva
 // o nome em "logo". "logoOpacidade" vai de 0.02 (quase invisível) a 0.3.
@@ -31,7 +32,7 @@ window.HUB_CONFIG = {
       "url": "https://painel-executivo.analistafjp.workers.dev/",
       "cor": "executivo",
       "icone": "grafico",
-      "novaAba": false
+      "novaAba": true
     },
     {
       "id": "poscorte",
@@ -40,7 +41,7 @@ window.HUB_CONFIG = {
       "url": "https://analistafjp-design.github.io/pos-corte/",
       "cor": "poscorte",
       "icone": "prancheta",
-      "novaAba": false
+      "novaAba": true
     }
   ]
 };

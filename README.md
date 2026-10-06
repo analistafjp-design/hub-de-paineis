@@ -18,13 +18,17 @@ Há três jeitos; o 1 e o 2 valem para todo mundo, o 3 só para o seu navegador.
    copie um bloco `{ ... }` da lista e mude os campos. O arquivo explica cada campo.
 2. **Pedindo para a Claude**: passe o nome e o endereço e ela atualiza o arquivo.
 3. **Pela própria página**: botão **Editar links** (ou o quadro **+ Adicionar painel**).
-   Edita nome, endereço, descrição, "abrir em nova aba" e a ordem. O **Salvar neste
+   Edita nome, endereço, descrição, "abrir em nova aba" (já marcado em todo painel novo) e a ordem. O **Salvar neste
    navegador** vale só ali. Para valer para todos, use **Copiar configuração** e cole o
    texto em `docs/paineis.js` (ou mande o texto para a Claude).
    Se a página mostrar "Links personalizados neste navegador · voltar ao padrão", o
    navegador está usando a cópia local; o botão volta para o que está no arquivo.
 
 Só entram endereços que começam com `https://` ou `http://`.
+
+Todo painel **abre em outra aba**, e o Hub continua aberto (campo `"novaAba": true`, que
+também é o valor de quem não escreve o campo). Só com `"novaAba": false` o painel abre
+na mesma aba e o Hub some.
 
 ## Logo de fundo (Águas do Rio)
 

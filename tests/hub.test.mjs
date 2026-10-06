@@ -131,3 +131,15 @@ test("a logo de fundo existe na pasta docs, é um PNG com transparência e fica 
   assert.ok(png.length < 400 * 1024, "a logo não deve pesar mais de 400 KB");
   assert.ok(HUB_CONFIG.logoOpacidade >= 0.05 && HUB_CONFIG.logoOpacidade <= 0.2, "logo clara, sem atrapalhar a leitura");
 });
+
+test("os painéis abrem em outra aba, para o Hub continuar aberto (pedido do usuário, 06/10/2026)", () => {
+  // Os dois botões de hoje.
+  for (const l of HUB_CONFIG.links) assert.equal(l.novaAba, true, l.id);
+  // Sem o campo, vale "outra aba"; só um false escrito de propósito abre na mesma.
+  const n = normalizar({ links: [{ url: "https://a.com" }, { url: "https://b.com", novaAba: false }, { url: "https://c.com", novaAba: true }] });
+  assert.deepEqual(plain(n.links.map((l) => l.novaAba)), [true, false, true]);
+  // Um painel novo, criado pelo "+ Adicionar painel" do editor, já nasce abrindo em outra aba.
+  assert.match(hubSource, /icone: "link", novaAba: true \}\);/);
+  // O link da página e o da barra lateral usam _blank com noopener/noreferrer.
+  assert.match(hubSource, /if \(l\.novaAba\) \{\s*a\.target = "_blank";\s*a\.rel = "noopener noreferrer";/);
+});
