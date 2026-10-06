@@ -22,9 +22,9 @@ function carregar(codigo, contexto = {}) {
   return context;
 }
 // hub.js sem `document` só define a HubLib (a parte de desenhar fica de fora).
-const { HubLib } = carregar(hubSource, { URL }); // o navegador já traz o URL; no vm ele é passado
+const { HubLib } = carregar(hubSource, { URL, URLSearchParams }); // o navegador já traz os dois; no vm eles são passados
 const { HUB_CONFIG } = carregar(configSource);
-const { urlValida, imagemValida, normalizar, corDoLink, textoDaConfiguracao, CORES } = HubLib;
+const { urlValida, imagemValida, normalizar, corDoLink, textoDaConfiguracao, modoEdicao, CORES } = HubLib;
 
 test("a configuração traz o Painel Executivo e o Pós-Corte, com os endereços combinados", () => {
   const links = plain(HUB_CONFIG.links.map((l) => [l.id, l.titulo, l.url]));
@@ -142,4 +142,19 @@ test("os painéis abrem em outra aba, para o Hub continuar aberto (pedido do usu
   assert.match(hubSource, /icone: "link", novaAba: true \}\);/);
   // O link da página e o da barra lateral usam _blank com noopener/noreferrer.
   assert.match(hubSource, /if \(l\.novaAba\) \{\s*a\.target = "_blank";\s*a\.rel = "noopener noreferrer";/);
+});
+
+test("o editor de links só aparece para quem abre o Hub com ?editar no endereço", () => {
+  // Quem só usa o Hub (o endereço de sempre) não vê nada de edição.
+  for (const busca of ["", "?", "?x=1", "?outro=editar", "?editarr", undefined, null])
+    assert.equal(modoEdicao(busca), false, String(busca));
+  for (const busca of ["?editar", "?editar=1", "?a=1&editar", "editar"])
+    assert.equal(modoEdicao(busca), true, busca);
+  // O botão "Editar links" já nasce escondido no HTML (não pisca na tela de ninguém)...
+  assert.match(html, /<button[^>]*\bdata-open-editor\b[^>]*\bhidden\b[^>]*>/);
+  // ...só é mostrado no modo de edição, e o quadro "+ Adicionar painel" nem é criado fora dele.
+  assert.match(hubSource, /b\.hidden = !modoEditar;/);
+  assert.match(hubSource, /if \(modoEditar\) \{\s*const add = el\("li", \{ class: "add"/);
+  // E, mesmo que alguém chame o editor por fora, ele não abre sem o modo de edição.
+  assert.match(hubSource, /function abrirEditor\(\) \{\s*if \(!modoEditar\) return;/);
 });

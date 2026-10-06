@@ -74,7 +74,18 @@
     return `window.HUB_CONFIG = ${JSON.stringify(cfg, null, 2)};\n`;
   }
 
-  global.HubLib = { CORES, urlValida, imagemValida, normalizar, corDoLink, textoDaConfiguracao };
+  // O editor de links só aparece para quem abre o Hub com ?editar no endereço. Não é senha:
+  // o que vale para todos só muda por commit no repositório; o editor só mexe na cópia
+  // do próprio navegador. Esconder evita que um colega "edite" achando que vale para todos.
+  function modoEdicao(busca) {
+    try {
+      return new URLSearchParams(String(busca || "")).has("editar");
+    } catch {
+      return false;
+    }
+  }
+
+  global.HubLib = { CORES, urlValida, imagemValida, normalizar, corDoLink, textoDaConfiguracao, modoEdicao };
 
   if (typeof document === "undefined") return;
 
@@ -94,6 +105,7 @@
   const $ = (sel, raiz = document) => raiz.querySelector(sel);
   const $$ = (sel, raiz = document) => [...raiz.querySelectorAll(sel)];
 
+  const modoEditar = modoEdicao(location.search);
   const padrao = normalizar(global.HUB_CONFIG, { titulo: "Hub de Painéis" });
   const lerSalva = () => {
     try {
@@ -197,17 +209,19 @@
       nav.append(cel);
     });
 
-    const add = el("li", { class: "add", role: "button", tabindex: "0" }, "+ Adicionar painel");
-    add.addEventListener("click", abrirEditor);
-    add.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        abrirEditor();
-      }
-    });
-    ul.append(add);
+    if (modoEditar) {
+      const add = el("li", { class: "add", role: "button", tabindex: "0" }, "+ Adicionar painel");
+      add.addEventListener("click", abrirEditor);
+      add.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          abrirEditor();
+        }
+      });
+      ul.append(add);
+    }
 
-    $("#foot-note").textContent = `${config.links.length} painel${config.links.length === 1 ? "" : "is"} · ${config.titulo}`;
+    $("#foot-note").textContent = `${config.links.length} painel${config.links.length === 1 ? "" : "is"} · ${config.titulo}${modoEditar ? " · modo de edição" : ""}`;
     $("#voltar-padrao").hidden = !personalizada;
   }
 
@@ -257,6 +271,7 @@
     m.className = "ed-msg" + (ok ? " ok" : "");
   }
   function abrirEditor() {
+    if (!modoEditar) return;
     rascunho = config.links.map((l) => ({ ...l }));
     renderEditor();
     msg("");
@@ -279,7 +294,10 @@
   // Os campos já validados viram a configuração do painel.
   const doRascunho = () => normalizar({ ...config, links: rascunho.map((l) => ({ ...l, url: urlValida(l.url) })) }, padrao);
 
-  $$("[data-open-editor]").forEach((b) => b.addEventListener("click", abrirEditor));
+  $$("[data-open-editor]").forEach((b) => {
+    b.hidden = !modoEditar;
+    b.addEventListener("click", abrirEditor);
+  });
   $("#ed-close").addEventListener("click", () => dlg.close());
   $("#ed-add").addEventListener("click", () => {
     rascunho.push({ id: `painel-${Date.now().toString(36)}`, titulo: "", descricao: "", url: "", cor: "", icone: "link", novaAba: true });
