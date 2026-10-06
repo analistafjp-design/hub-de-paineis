@@ -42,9 +42,14 @@ Os dois painéis têm repositório próprio: `analistafjp-design/painel-executiv
 9. **Favicon**: a marca da Águas do Rio que o usuário enviou (06/10/2026), em `favicon-32.png`,
    `favicon-192.png` e `apple-touch-icon.png` (todos em `docs/`). Não volte ao ícone
    desenhado à mão. Um teste confere os arquivos e os tamanhos declarados no HTML.
-10. **Todo ajuste ganha um teste** em `tests/*.test.mjs`. Antes de cada commit rode
+10. **Ícone da barra de tarefas = manifesto**: o favicon da aba não basta; sem
+   `manifest.webmanifest` (ícones de 192 e 512 px, `start_url` e `display`) o Chrome/Edge põe uma
+   letra "H" na barra de tarefas (queixa do usuário, 06/10/2026). A CSP precisa de
+   `manifest-src 'self'`. Um atalho já criado não troca de ícone sozinho: o usuário precisa
+   desafixar, apagar e instalar de novo (está no README).
+11. **Todo ajuste ganha um teste** em `tests/*.test.mjs`. Antes de cada commit rode
    `npm test`.
-11. **Mudança visível**: confira no Chromium (Playwright pré-instalado em
+12. **Mudança visível**: confira no Chromium (Playwright pré-instalado em
    `/opt/pw-browsers`) no computador e no celular (390 px), sem rolagem lateral e sem
    erro no console.
 
