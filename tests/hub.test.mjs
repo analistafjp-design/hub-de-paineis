@@ -87,7 +87,7 @@ test("normalizar: ids repetidos ganham sufixo, a opacidade fica entre 0,02 e 0,3
 test("as cores dos painéis existentes são as deles; os novos ganham cor própria", () => {
   assert.deepEqual(plain(CORES.executivo), { c1: "#0B3B66", c2: "#146B88" });
   assert.deepEqual(plain(CORES.poscorte), { c1: "#0f2a5c", c2: "#1e4fd6" });
-  assert.deepEqual(plain(CORES.cadastro), { c1: "#14296b", c2: "#2a4fc0" });
+  assert.deepEqual(plain(CORES.cadastro), { c1: "#5b21b6", c2: "#7c3aed" });
   const cadastro = HUB_CONFIG.links.find((l) => l.id === "cadastro");
   assert.equal(cadastro.cor, "cadastro");
   assert.deepEqual(plain(corDoLink(cadastro, 2)), plain(CORES.cadastro));
@@ -210,4 +210,21 @@ test("o Hub é instalável como aplicativo: o ícone da barra de tarefas vem do 
     lados.push(lado);
   }
   assert.ok(lados.includes(192) && lados.includes(512), `ícones do manifesto: ${lados}`);
+});
+
+test("cada painel tem uma cor própria: nenhum cartão se confunde com outro", () => {
+  const cores = HUB_CONFIG.links.map((l, i) => plain(corDoLink(l, i)));
+  const finais = cores.map((c) => c.c2.toLowerCase());
+  assert.equal(new Set(finais).size, finais.length, "duas cores finais iguais");
+  assert.equal(new Set(cores.map((c) => c.c1.toLowerCase())).size, cores.length, "duas cores iniciais iguais");
+});
+
+test("os cartões são compactos e se espalham em colunas: a página não precisa de barra de rolagem", () => {
+  // Vários cartões por linha (auto-fill) e altura mínima baixa, para 3 ou 4 painéis caberem na tela.
+  assert.match(html, /#links \{[^}]*grid-template-columns: repeat\(auto-fill, minmax\(\d+px, 1fr\)\)/);
+  const minAltura = Number(/\.tile \{[^}]*min-height: (\d+)px/.exec(html)[1]);
+  assert.ok(minAltura <= 190, `cartão alto demais: ${minAltura}px`);
+  const largura = Number(/minmax\((\d+)px, 1fr\)/.exec(/#links \{[^}]*\}/.exec(html)[0])[1]);
+  assert.ok(largura <= 320, "cartão largo demais para caber 3 por linha");
+  assert.ok(Number(/main \{[^}]*max-width: (\d+)px/.exec(html)[1]) >= 1000, "o conteúdo precisa de largura para 3 colunas");
 });

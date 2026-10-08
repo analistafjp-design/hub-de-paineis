@@ -7,7 +7,7 @@
   const CORES = {
     executivo: { c1: "#0B3B66", c2: "#146B88" },
     poscorte: { c1: "#0f2a5c", c2: "#1e4fd6" },
-    cadastro: { c1: "#14296b", c2: "#2a4fc0" }, // o azul-marinho do cabeçalho do painel Cadastro e Venda
+    cadastro: { c1: "#5b21b6", c2: "#7c3aed" }, // roxo: cor própria, diferente do azul-petróleo do Executivo e do azul do Pós-Corte
   };
   const PALETA_EXTRA = [
     { c1: "#0b5d4f", c2: "#17a58a" },
