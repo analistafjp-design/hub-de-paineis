@@ -50,24 +50,25 @@
 
   /* Conteúdo */
   .content { display: flex; flex-direction: column; min-width: 0; }
-  main { flex: 1; width: 100%; max-width: 980px; padding: 40px 28px 40px; }
-  .intro h2 { font-size: 30px; line-height: 1.15; letter-spacing: -.01em; font-weight: 800; }
+  main { flex: 1; width: 100%; max-width: 1240px; padding: 28px 28px 20px; }
+  .intro h2 { font-size: 26px; line-height: 1.15; letter-spacing: -.01em; font-weight: 800; }
   .intro p { margin-top: 6px; color: var(--ink-2); max-width: 56ch; }
-  footer { margin-top: auto; display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 18px 28px 26px; color: var(--muted); font-size: 12.5px; }
+  footer { margin-top: auto; display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 10px 28px 18px; color: var(--muted); font-size: 12.5px; }
   .link-btn { border: 0; background: none; padding: 0; color: var(--navy); font-size: 12.5px; font-weight: 600; text-decoration: underline; }
 
-  #links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 28px; }
+  /* Cartões compactos: cabem vários por linha e a página não precisa de barra de rolagem */
+  #links { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-top: 20px; }
   .link { position: relative; display: flex; }
-  .tile { display: flex; flex-direction: column; justify-content: space-between; gap: 40px; width: 100%; min-height: 230px; padding: 24px; border-radius: 20px; color: #fff; background: linear-gradient(145deg, var(--c1), var(--c2)); box-shadow: 0 18px 34px -20px rgba(11,59,102,.7); transition: transform .15s; }
+  .tile { display: flex; flex-direction: column; justify-content: space-between; gap: 22px; width: 100%; min-height: 176px; padding: 20px; border-radius: 18px; color: #fff; background: linear-gradient(145deg, var(--c1), var(--c2)); box-shadow: 0 18px 34px -20px rgba(11,59,102,.7); transition: transform .15s; }
   a.tile:hover { transform: translateY(-3px); }
-  .ico { width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center; background: rgba(255,255,255,.18); }
-  .ico svg { width: 24px; height: 24px; }
-  .t-title { font-weight: 700; font-size: 20px; line-height: 1.2; }
-  .t-desc { color: rgba(255,255,255,.82); font-size: 14px; margin-top: 4px; }
+  .ico { width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center; background: rgba(255,255,255,.18); }
+  .ico svg { width: 22px; height: 22px; }
+  .t-title { font-weight: 700; font-size: 19px; line-height: 1.2; }
+  .t-desc { color: rgba(255,255,255,.82); font-size: 13.5px; line-height: 1.4; margin-top: 3px; }
   .t-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
   .t-host { font-size: 12px; color: rgba(255,255,255,.65); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
   .go { display: inline-flex; align-items: center; gap: 8px; flex: none; padding: 8px 14px; border-radius: 10px; font-weight: 700; font-size: 14px; background: #fff; color: var(--navy); }
-  .add { grid-column: 1 / -1; display: grid; place-items: center; min-height: 84px; border: 2px dashed var(--line-strong); border-radius: 20px; color: var(--muted); font-weight: 600; background: rgba(255,255,255,.5); cursor: pointer; }
+  .add { grid-column: 1 / -1; display: grid; place-items: center; min-height: 64px; border: 2px dashed var(--line-strong); border-radius: 20px; color: var(--muted); font-weight: 600; background: rgba(255,255,255,.5); cursor: pointer; }
   .add:hover { border-color: var(--navy); color: var(--navy); }
 
   /* Editor de links */
@@ -102,10 +103,10 @@
     .btn-edit { margin-top: 0; margin-left: auto; }
     .watermark { left: 50%; }
     main, footer { padding-left: 16px; padding-right: 16px; }
-    main { padding-top: 24px; }
+    main { padding-top: 20px; }
     .intro h2 { font-size: 24px; }
     #links { grid-template-columns: minmax(0, 1fr); }
-    .tile { min-height: 180px; }
+    .tile { min-height: 160px; }
     .ed-grid { grid-template-columns: 1fr; }
   }
 </style>

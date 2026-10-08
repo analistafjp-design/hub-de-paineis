@@ -32,7 +32,7 @@ Os painéis têm repositório próprio: `analistafjp-design/painel-executivo`
 5. **Só `http(s)` vira link.** Nenhum texto da configuração entra na página como HTML
    (só `textContent` e ícones fixos): um teste confere.
 6. **As cores dos botões são as dos painéis** (`CORES` em `hub.js`): Executivo
-   `#0B3B66`→`#146B88`, Pós-Corte `#0f2a5c`→`#1e4fd6`, Cadastro e Venda `#14296b`→`#2a4fc0`.
+   `#0B3B66`→`#146B88`, Pós-Corte `#0f2a5c`→`#1e4fd6`, Cadastro e Venda `#5b21b6`→`#7c3aed`.
    Um teste confere.
 7. **Modelo escolhido pelo usuário (06/10/2026): o "D"** — barra lateral escura + cartões
    grandes coloridos + quadro tracejado "+ Adicionar painel". Os outros modelos (A, B, C)

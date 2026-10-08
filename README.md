@@ -5,7 +5,7 @@ Página inicial com um botão para cada painel: **Painel Executivo**, **Pós-Cor
 dos painéis passa por aqui, a página só guarda o endereço de cada um.
 
 - Layout: barra lateral escura + cartões coloridos, nas cores dos painéis
-  (Executivo: `#0B3B66` → `#146B88`; Pós-Corte: `#0f2a5c` → `#1e4fd6`; Cadastro e Venda: `#14296b` → `#2a4fc0`).
+  (Executivo: `#0B3B66` → `#146B88`; Pós-Corte: `#0f2a5c` → `#1e4fd6`; Cadastro e Venda: `#5b21b6` → `#7c3aed`).
 - Funciona no computador e no celular.
 - Sem biblioteca, sem fonte e sem CDN: tudo está na pasta `docs/`.
 
