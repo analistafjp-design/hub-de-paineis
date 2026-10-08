@@ -11,7 +11,7 @@
 //   titulo     texto do botão
 //   descricao  frase curta embaixo do título
 //   url        endereço do painel (só https:// ou http://)
-//   cor        "executivo", "poscorte" (as cores dos painéis existentes),
+//   cor        "executivo", "poscorte", "cadastro" (as cores dos painéis existentes),
 //              um código como "#0b5d4f", ou vazio para uma cor automática
 //   icone      "grafico", "prancheta" ou "link"
 //   novaAba    true abre o painel em outra aba, e o Hub continua aberto (o certo para
@@ -41,6 +41,15 @@ window.HUB_CONFIG = {
       "url": "https://analistafjp-design.github.io/pos-corte/",
       "cor": "poscorte",
       "icone": "prancheta",
+      "novaAba": true
+    },
+    {
+      "id": "cadastro",
+      "titulo": "Cadastro e Venda",
+      "descricao": "Efetividade das equipes de cadastro e venda: visitas, resultados, tempos e novos alvos.",
+      "url": "https://analistafjp-design.github.io/cadastro-venda/",
+      "cor": "cadastro",
+      "icone": "grafico",
       "novaAba": true
     }
   ]

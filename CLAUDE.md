@@ -6,15 +6,16 @@ Converse com o usuário sempre em **português do Brasil**, de forma direta. Lei
 ## O que é
 
 Página estática (`docs/`) com um botão para cada painel do usuário (hoje: Painel
-Executivo e Pós-Corte), publicada pelo GitHub Pages (branch `main`, pasta `/docs`).
-Os dois painéis têm repositório próprio: `analistafjp-design/painel-executivo`
-(Cloudflare Workers) e `analistafjp-design/pos-corte` (GitHub Pages).
+Executivo, Pós-Corte e Cadastro e Venda), publicada pelo GitHub Pages (branch `main`, pasta `/docs`).
+Os painéis têm repositório próprio: `analistafjp-design/painel-executivo`
+(Cloudflare Workers), `analistafjp-design/pos-corte` e `analistafjp-design/cadastro-venda`
+(GitHub Pages).
 
 ## Regras permanentes
 
 1. **Os endereços e textos dos botões ficam só em `docs/paineis.js`.** Nunca coloque um
    endereço de painel dentro de `index.html` ou `hub.js`. Os dois primeiros endereços
-   (Executivo e Pós-Corte) já estão preenchidos; **os próximos, o usuário insere ele mesmo**
+   (Executivo, Pós-Corte e Cadastro e Venda) já estão preenchidos; **os próximos, o usuário insere ele mesmo**
    (pelo botão "Editar links" ou pelo arquivo). Não deixe "endereço a definir" nos botões
    que já existem.
 2. **Os painéis abrem em outra aba** (`"novaAba": true`, padrão de todo botão e de todo painel
@@ -31,7 +32,8 @@ Os dois painéis têm repositório próprio: `analistafjp-design/painel-executiv
 5. **Só `http(s)` vira link.** Nenhum texto da configuração entra na página como HTML
    (só `textContent` e ícones fixos): um teste confere.
 6. **As cores dos botões são as dos painéis** (`CORES` em `hub.js`): Executivo
-   `#0B3B66`→`#146B88`, Pós-Corte `#0f2a5c`→`#1e4fd6`. Um teste confere.
+   `#0B3B66`→`#146B88`, Pós-Corte `#0f2a5c`→`#1e4fd6`, Cadastro e Venda `#14296b`→`#2a4fc0`.
+   Um teste confere.
 7. **Modelo escolhido pelo usuário (06/10/2026): o "D"** — barra lateral escura + cartões
    grandes coloridos + quadro tracejado "+ Adicionar painel". Os outros modelos (A, B, C)
    foram só proposta e foram descartados; não os recrie sem o usuário pedir.
