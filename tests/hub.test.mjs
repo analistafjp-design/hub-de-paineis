@@ -26,11 +26,12 @@ const { HubLib } = carregar(hubSource, { URL, URLSearchParams }); // o navegador
 const { HUB_CONFIG } = carregar(configSource);
 const { urlValida, imagemValida, normalizar, corDoLink, textoDaConfiguracao, modoEdicao, CORES } = HubLib;
 
-test("a configuração traz o Painel Executivo e o Pós-Corte, com os endereços combinados", () => {
+test("a configuração traz o Painel Executivo, o Pós-Corte e o Cadastro e Venda, com os endereços combinados", () => {
   const links = plain(HUB_CONFIG.links.map((l) => [l.id, l.titulo, l.url]));
   assert.deepEqual(links, [
     ["executivo", "Painel Executivo", "https://painel-executivo.analistafjp.workers.dev/"],
     ["poscorte", "Pós-Corte", "https://analistafjp-design.github.io/pos-corte/"],
+    ["cadastro", "Cadastro e Venda", "https://analistafjp-design.github.io/cadastro-venda/"],
   ]);
 });
 
@@ -83,9 +84,13 @@ test("normalizar: ids repetidos ganham sufixo, a opacidade fica entre 0,02 e 0,3
   assert.deepEqual(plain(normalizar(undefined).links), []);
 });
 
-test("as cores dos dois painéis existentes são as deles; os novos ganham cor própria", () => {
+test("as cores dos painéis existentes são as deles; os novos ganham cor própria", () => {
   assert.deepEqual(plain(CORES.executivo), { c1: "#0B3B66", c2: "#146B88" });
   assert.deepEqual(plain(CORES.poscorte), { c1: "#0f2a5c", c2: "#1e4fd6" });
+  assert.deepEqual(plain(CORES.cadastro), { c1: "#14296b", c2: "#2a4fc0" });
+  const cadastro = HUB_CONFIG.links.find((l) => l.id === "cadastro");
+  assert.equal(cadastro.cor, "cadastro");
+  assert.deepEqual(plain(corDoLink(cadastro, 2)), plain(CORES.cadastro));
   assert.deepEqual(plain(corDoLink({ cor: "executivo" }, 0)), plain(CORES.executivo));
   assert.deepEqual(plain(corDoLink({ cor: "#aa22cc" }, 0)), { c1: "#aa22cc", c2: "#aa22cc" });
   // Cor desconhecida ou vazia: uma da paleta automática, e não a mesma em botões seguidos.
